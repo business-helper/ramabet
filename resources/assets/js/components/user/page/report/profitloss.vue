@@ -1,0 +1,144 @@
+
+<template>
+    <div class="container-fluid" style="">
+        <div class="row clearfix">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div class="card">
+                    <div class="header">
+                        <h2>
+                            Profit And Loss Report
+                        </h2>
+                    </div>
+                    <div class="date_filter header">
+                        <input type="date" v-model="start_date" name="start_date" class="form-control" placeholder="Date start...">
+                        <input type="date" v-model="end_date" name="end_date" class="form-control" placeholder="Date end...">
+                        <!--<input type="text" v-model="keyword" name="search" class="form-control" placeholder="Search">-->
+                        <button type="button" class="btn bg-amber waves-effect" @click="read">Filter</button>
+                        <button type="button" class="btn bg-light-green waves-effect" @click="clear">Clear</button>
+                    </div>
+                    <div class="body">
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-striped table-hover dataTable exportable">
+                                <thead>
+                                <tr>
+                                    <th>S.No.</th>
+                                    <th>Credit</th>
+                                    <th>Debit</th>
+                                    <th>Total</th>
+                                    <th>Narration</th>
+                                    <th>Remark</th>
+                                    <th>Date&Time</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr v-for="item in reports" >
+                                    <td>{{item.id}}</td>
+                                    <td :class="item.amount>=0?'profit_color':'loss_color'">{{item.credit}}</td>
+                                    <td :class="item.amount>=0?'profit_color':'loss_color'">{{item.debit}}</td>
+                                    <td>{{item.total}}</td>
+                                    <td>{{item.narration}}</td>
+                                    <td> <a @click="getProfitDetail(item)">{{item.remark}}(Show Bets)</a></td>
+                                    <td>{{item.date}}</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <show-bet></show-bet>
+        </div>
+    </div>
+
+</template>
+<script>
+    import ShowBet from './showBet.vue';
+    export default {
+
+        data() {
+            return {
+                keyword: "",
+                start_date: "",
+                end_date: "",
+                reports: [],
+                user_id: this.$userId,
+                user_type: "users",
+                dt: "",
+                market_id:0
+
+            }
+        },
+        props: [
+
+        ],
+        mounted() {
+            $('body').removeClass('overlay-open');
+            Event.$on('getDeclare',(data) => {
+                if (data==null)return;
+                this.read();
+            });
+        },
+        methods: {
+            getProfitDetail(item){
+                //Event.$emit('getProfit',market_id);
+                if (item.t_type=='runners'){
+                    Event.$emit('getSessionProfit',item.t_id);
+                } else{
+                    Event.$emit('getProfit',item.t_id);
+                }
+                //this.market_id=market_id;
+            },
+            read() {
+                if(this.$route.query.userId!=undefined){
+                    this.user_id=this.$route.query.userId
+                    this.userName=this.$route.query.userName
+                    if (this.$route.query.userType==4){
+                        this.user_type='users';
+                    }
+                }
+
+                this.reports=[];
+                if (this.dt!=="") this.dt.destroy();
+                var data=uuidv1();
+
+                axios.defaults.headers.common.Authtype =  'tf1-'+this.$User.id+'-'+data;
+                axios.defaults.headers.common.Authentication = md5('tf1-'+this.$User.id+'-'+data+this.$User.login_session+'tcgtchkmk1014');
+                window.axios.post('/api/getReport', {reportType:'P|L', end_date: this.end_date,start_date: this.start_date, user_id:this.user_id, user_type: this.user_type}).then((res) => {
+                    this.reports = res.data.data;
+                    this.$nextTick(() => {
+                        if ( $.fn.DataTable.isDataTable('.exportable') ) {
+                            this.dt.destroy();
+                        }
+                        this.dt = $('.exportable').DataTable({
+                            dom: 'lBfrtip',
+                            responsive: true,
+                            buttons: [
+                                'copy', 'csv', 'excel', 'pdf', 'print'
+                            ],
+                            lengthMenu: [[5, 10, 25, 50,-1],[5, 10, 25, 50,'all']],
+                            order: [[ 0, "desc" ]]
+                        });
+                    });
+
+                });
+            },
+            fixed(value){
+                return value.toFixed(2);
+            },
+            clear(){
+                this.start_date = "";
+                this.end_date = "";
+                this.keyword = "";
+            }
+
+        },
+        components:{
+          ShowBet
+        },
+        created() {
+            //this.user_type = this.$route.params.type;
+            //this.user_id = this.$route.params.user_id;
+            this.read();
+        },
+    }
+</script>

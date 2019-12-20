@@ -1,0 +1,136 @@
+<template>
+    <div style="padding-bottom: 200px;">
+        <div id="accordion_19" role="tablist" aria-multiselectable="true" class="panel-group full-body">
+            <div class="panel">
+                <div role="tab" id="headingOne_3917" class="panel-heading"
+                     style="background-color: rgb(8, 42, 73); color: white;">
+                    <h4 class="panel-title"
+                        style="text-align: center; padding: 0px; font-size: 16px;">
+                        <a role="button" data-toggle="collapse" :href="'#collapseOne_3917'+type" aria-expanded="true"
+                           aria-controls="collapseOne_19" class="" style="padding: 5px 15px;text-align: left">
+                            <img class="soccer">
+                            Soccer
+                        </a>
+                    </h4>
+                </div>
+                <div :id="'collapseOne_3917'+type" role="tabpanel" aria-labelledby="headingOne_19" aria-expanded="true"
+                     class="panel-collapse collapse in" style="">
+                    <div class="panel-body" style="padding: 0px;">
+                        <eventshome page="sport" target_id="1" :type="type"></eventshome>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="accordion_20" role="tablist" aria-multiselectable="true" class="panel-group full-body">
+            <div class="panel">
+                <div role="tab" id="headingOne_3918" class="panel-heading"
+                     style="background-color: rgb(8, 42, 73); color: white;">
+                    <h4 class="panel-title"
+                        style="text-align: center; padding: 0px; font-size: 16px;">
+                        <a role="button" data-toggle="collapse" :href="'#collapseOne_3918'+type" aria-expanded="true"
+                           aria-controls="collapseOne_19" class="" style="padding: 5px 15px;text-align: left">
+                            <img class="cricket">
+                            Cricket
+                        </a>
+                    </h4>
+                </div>
+                <div :id="'collapseOne_3918'+type" role="tabpanel" aria-labelledby="headingOne_19" aria-expanded="true"
+                     class="panel-collapse collapse in" style="">
+                    <div class="panel-body" style="padding: 0px;">
+                        <eventshome page="sport" target_id="4" :type="type"></eventshome>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="accordion_21" role="tablist" aria-multiselectable="true" class="panel-group full-body">
+            <div class="panel">
+                <div role="tab" id="headingOne_3919" class="panel-heading"
+                     style="background-color: rgb(8, 42, 73); color: white;">
+                    <h4 class="panel-title"
+                        style="text-align: center; padding: 0px; font-size: 16px;">
+                        <a role="button" data-toggle="collapse" :href="'#collapseOne_3919'+type" aria-expanded="true"
+                           aria-controls="collapseOne_19" class="" style="padding: 5px 15px;text-align: left">
+                            <img class="tennis">
+                            Tennis
+                        </a>
+                    </h4>
+                </div>
+                <div :id="'collapseOne_3919'+type" role="tabpanel" aria-labelledby="headingOne_19" aria-expanded="true"
+                     class="panel-collapse collapse in" style="">
+                    <div class="panel-body" style="padding: 0px;">
+                        <eventshome page="sport" target_id="2" :type="type"></eventshome>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</template>
+<style>
+
+</style>
+
+<script>
+    export default {
+        mounted() {
+            console.log('Component mounted.')
+        },
+        data() {
+            return {
+                link_list: [], available_balance: '', winnings: '',
+            }
+        },
+        props:[
+            'type'
+        ],
+        methods: {
+            getBaner() {
+                var send_data = {};
+                send_data.type = 'get';
+                send_data.table_name = 'link_list';
+                send_data.condition = [];
+                send_data.condition.push(['is_active', 'true']);
+                window.axios.post('/api/table_edit', {parameter: JSON.stringify(send_data)}).then(({data}) => {
+
+                    this.link_list = data.data;
+                    console.log('Get LinkList----------------------', this.link_list);
+
+                });
+            },
+            next() {
+                this.$refs.slick.next();
+            },
+
+            prev() {
+                this.$refs.slick.prev();
+            },
+
+            reInit() {
+                // Helpful if you have to deal with v-for to update dynamic lists
+                this.$nextTick(() => {
+                    this.$refs.slick.reSlick();
+                });
+            },
+        },
+        beforeUpdate() {
+            if (this.$refs.slick) {
+                this.$refs.slick.destroy();
+            }
+        },
+        updated() {
+            this.$nextTick(function () {
+                if (this.$refs.slick) {
+                    this.$refs.slick.create(this.slickOptions);
+                }
+            });
+        },
+        created() {
+            //this.getBaner();
+            Event.$emit('leftside', '');
+            this.getBaner();
+        },
+
+    }
+</script>
