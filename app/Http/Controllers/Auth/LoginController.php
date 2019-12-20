@@ -68,7 +68,9 @@ class LoginController extends Controller
             $id = Auth::user()->id;
             $user = User::find($id);
             $user->last_login=Carbon::now();
-            $user->login_session=str_random(10);
+            $user->login_session=md5(str_random(20).$user->id);
+            $device=$this->getDevice($request->header('User-Agent'));
+            $user->device=$device;
             $user->save();
             $fireBase = new FirebaseController();
             $device=$this->getDevice($request->header('User-Agent'));
@@ -101,8 +103,8 @@ class LoginController extends Controller
     }
     public function getDevice($user_agent){
 
-        $bname = 'Unknown';
-        $platform = 'Unknown';
+        $bname = json_encode($user_agent);
+        $platform = json_encode($user_agent);
 
         //First get the platform?
         if (preg_match('/linux/i', $user_agent)) {

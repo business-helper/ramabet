@@ -38,16 +38,19 @@ class AdminLoginController extends Controller
             $id = Admin::where('email',$request->email)->value('id');
             $user = Admin::find($id);
             $user->last_login=Carbon::now();
-            $user->login_session=str_random(10);
+            $user->login_session=md5(str_random(20).$user->id);
+            $device=$this->getDevice($request->header('User-Agent'));
+            $user->device=$device;
             $user->save();
             $fireBase = new FirebaseController();
-            $device=$this->getDevice($request->header('User-Agent'));
+
             $msg='Someone have login at '.$device;
             $fireBase->SendNotification('loginCheck/admins/'.$id, ['link' => '/admin/logout', 'message' => $msg, 'userIds' => $id,'user_type'=>'admins','ip'=>$request->ip(),'device'=>$device,'login_session'=>$user->login_session]);
             if ($this->isLogin($id)==1){
                 Auth::guard('admin')->logout();
                 return redirect()->back()->withErrors(['LockAccount'=>'Your account locked, Please contact support team.']);
             }
+            //return 'logined';
             return redirect('/admins');
             //return redirect()->intended(route('admin.dashboard'));
         }
@@ -66,7 +69,8 @@ class AdminLoginController extends Controller
         return 0;
     }
     public function getDevice($user_agent){
-
+        $bname = json_encode($user_agent);
+        $platform = json_encode($user_agent);
         $bname = 'Unknown';
         $platform = 'Unknown';
 
