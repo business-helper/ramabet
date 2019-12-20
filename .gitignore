@@ -6,9 +6,9 @@
 /.idea
 /.vagrant
 /config/database.php
-/resources/admin
-/resources/assets
-/resources/partner
+#/resources/admin
+#/resources/assets
+#/resources/partner
 
 /app/Http/Controllers/ramabet-dbb7f-firebase-adminsdk-rn5ws-4d81cc8e60.json
 /app/Http/Controllers/skbetfair-b1d59-firebase-adminsdk-efz2b-df9efa1bab.json
