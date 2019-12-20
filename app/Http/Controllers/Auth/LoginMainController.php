@@ -1,26 +1,10 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Auth;
 
-use App\Admin;
-use App\Event;
-use App\League;
-use App\Market;
-use App\Report;
-use App\Runner;
-use App\Settlement;
 use App\User;
-use Carbon\Carbon;
-use DateTime;
-use Illuminate\Http\Request;
-use Illuminate\Http\Response;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Input;
-use Jenssegers\Agent\Agent;
-use Stevebauman\Location\Facades\Location;
-use Stripe\Reporting\ReportRun;
-
+use App\Http\Controllers\Controller;
+use Auth;
 class LoginMainController extends Controller
 {
     /**

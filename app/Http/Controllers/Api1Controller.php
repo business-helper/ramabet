@@ -548,6 +548,7 @@ class Api1Controller extends Controller
         if ($this->isLogin($user->id)==1){
             return $this->response(1,'Your account locked, please contact support team.','');
         }
+        $user->api_token=$user->createToken('MyApp')-> accessToken;
         return $this->response(0,'Successfully login.',$user);
 
     }
