@@ -1,0 +1,452 @@
+================================================================================
+Time: December 22, 2019, 9:20 am
+Duration: 0.309
+Header: {"host":["localhost"],"connection":["keep-alive"],"cache-control":["max-age=0"],"upgrade-insecure-requests":["1"],"user-agent":["Mozilla\/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit\/537.36 (KHTML, like Gecko) Chrome\/79.0.3945.88 Safari\/537.36"],"sec-fetch-user":["?1"],"accept":["text\/html,application\/xhtml+xml,application\/xml;q=0.9,image\/webp,image\/apng,*\/*;q=0.8,application\/signed-exchange;v=b3;q=0.9"],"sec-fetch-site":["none"],"sec-fetch-mode":["navigate"],"accept-encoding":["gzip, deflate, br"],"accept-language":["en-US,en;q=0.9,ko;q=0.8"],"cookie":["XSRF-TOKEN=eyJpdiI6IkdNOTZ5Ujc3a093Z3lYUUtOSVU0Snc9PSIsInZhbHVlIjoiMGFuemJmaUtaRTZid0NRb3RkaXdXUWZvUkRxckNQbXUwZTM0d2FNVXRGd1c3SlBha01RM0xwV2pcLzhvR2Y3aXNGaURPTU0zMGozS1RHUWwzMVp4bHFnPT0iLCJtYWMiOiIwMmY4MjAzNzRmODM4YzBiZGI0ODBiZjNhNDdhZTMzMzg5OTUyNzE2ZGU5M2RlNGMxMTIwMzkxZjNiOWY4NGIwIn0%3D; laravel_session=eyJpdiI6IlwvRTBrMlBoN3dBQzNKOWIyQ0hFa1dnPT0iLCJ2YWx1ZSI6IkxqYWZUYjcrR1Y2ZkMzS0ZNT2t0RFR3NjFjcm54VTVsNHF2bnNhUFZCeHNCTkFxQlN6cUpHVk5XTUNXNnhOUldZTG1EdURWWVpXK1UzRzBjSHo5K1pBPT0iLCJtYWMiOiJiNzI0MzU2OGM3MTA0NzE4MjRlYWRlZTkxMGIxZDk4MmQ4YzlmZjVhYTZjNmEwMDdjYTYyNzAxMTlmZWMyODY2In0%3D"]}
+IP Address: 127.0.0.1
+URL: http://localhost/ramaex1208/mobile/login
+Method: GET
+Input: 
+Output: <!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>RamaBet</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,height=device-height, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+    <script defer src="https://use.fontawesome.com/releases/v5.7.2/js/all.js" integrity="sha384-0pzryjIRos8mFBWMzSSZApWtPl/5++eIfzYmTgBBmXYdhvxPc+XcFEk+zJwDgWbP" crossorigin="anonymous"></script>
+
+
+
+    <!-- Fonts -->
+    <link rel="dns-prefetch" href="//fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet" type="text/css">
+
+    <!-- Styles -->
+
+    <style>
+        html {
+            height: 100%;
+            display: table;
+            width: 100%;
+        }
+        body{
+
+            display: contents;
+        }
+        @media  screen and (max-width: 767px) {
+
+        }
+        form{
+            color: black;
+
+            border-radius: 10px;
+            padding: 22px;
+            text-align: center;
+            max-width: 511px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .mobile_show form .form-control{
+            border-radius: 30px;
+            background-color: #0b5ca0;
+            color: #fffafa;
+            border: 0;
+        }
+        .mobile_hide form{
+            background-color: white;
+        }
+        .login_image{
+            position: relative;
+            background-image: url("http://localhost/ramaex1208/public/img/login.jpg");
+            height: 50%;
+            background-position: top;
+            background-size: cover;
+            z-index: 100;
+            border-radius: 61%/0 0 92px 92px;
+        }
+        @media (max-width: 767px) {
+            .mobile_hide {
+                display: none !important;
+            }
+
+            .mobile_show {
+                display: block !important;
+            }
+        }
+        .mobile_show {
+            display: none;
+        }
+        .login-page {
+            /*background-image: url("/public/img/admin_login.jpg") !important;*/
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: cover;
+            padding-left: 0;
+            margin: auto !important;
+            height: 100%;
+            padding-top: 16%;
+            overflow-x: hidden;
+        }
+    </style>
+</head>
+<body>
+<div class="mobile_show">
+    <div class="login_image">
+        <div class="" style="min-width:300px;width: 60%;margin-bottom: 20px; margin: auto;text-align: center;color: white;padding-top: 184px" >
+            <a class="" href="http://localhost/ramaex1208"><img height="35px" src="http://localhost/ramaex1208/public/img/logo1.png" style="width: 100%;height: auto;max-width: 500px"></a>
+            
+        </div>
+    </div>
+    <div class="container-fluid" style="position: absolute;top: 24%;width: 100%;background-color: rgb(11,56,98);">
+        <div class="row" style="border-radius: 50px; margin-top: 50%; padding: 20px; height: 50%;">
+                                        <form method="POST" action="http://localhost/ramaex1208/login">
+                <input type="hidden" name="_token" value="TldrJt9niz1Y4LjY34q14VrM9Aq28ldhxvxGill7">
+                
+                <div class="form-group">
+                    
+
+                    <div class="">
+                        <input id="identity" type="text" class="form-control" name="identity" value="" placeholder="User name" required autofocus>
+
+                                            </div>
+                </div>
+
+                <div class="form-group" style="margin-top: 20px">
+                    
+
+                    <div class="">
+                        <input id="password" type="password" class="form-control" name="password" placeholder="Password" required>
+
+                                            </div>
+                </div>
+                <div class="form-group" style="margin-top: 20px">
+                    
+                    <div class="" style="position: relative">
+                                                <input type="hidden" class="form-control" name="v_code1" value="70358">
+                        <input type="text" class="form-control" name="v_code" placeholder="Validation code" required>
+                        <span style="position: absolute; top: 5px; right: 10px; font-size: 18px; font-weight: bold;">70358</span>
+                                            </div>
+                </div>
+                <div class="form-group">
+                    <div class="checkbox">
+                        <label>
+                            <input type="checkbox" name="remember" > Remember Me
+                        </label>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary">
+                        Login
+                    </button>
+                </div>
+                <div class="row" style="color: #b9bbbe">
+                    ©️ RamaBet.com
+                    
+
+                </div>
+            </form>
+        </div>
+
+    </div>
+</div>
+<div class="mobile_hide login-page">
+    <div class="login-box">
+        <div class="logo">
+            <div class=""
+                 style="min-width:300px;width: 60%;margin-bottom: 20px; margin: auto;text-align: center;color: white;">
+                <a class="" href="http://localhost/ramaex1208"><img height="35px" src="http://localhost/ramaex1208/public/img/logo1.png"
+                                                     style="width: 100%;height: auto;max-width: 500px"></a>
+                
+            </div>
+        </div>
+        <div class="card" style="opacity: .8">
+            <div class="body">
+                <div class="row" style="border-radius: 50px; height: 50%;">
+                    <form method="POST" action="http://localhost/ramaex1208/login">
+                        <input type="hidden" name="_token" value="TldrJt9niz1Y4LjY34q14VrM9Aq28ldhxvxGill7">
+                        
+                        <div class="form-group">
+                            
+
+                            <div class="">
+                                <input id="identity" type="text" class="form-control" name="identity" value="" placeholder="User name" required autofocus>
+
+                                                            </div>
+                        </div>
+
+                        <div class="form-group" style="margin-top: 20px">
+                            
+
+                            <div class="">
+                                <input id="password" type="password" class="form-control" name="password" placeholder="Password" required>
+
+                                                            </div>
+                        </div>
+                        <div class="form-group" style="margin-top: 20px">
+                            
+                            <div class="" style="position: relative">
+                                                                <input type="hidden" class="form-control" name="v_code1" value="85471">
+                                <input type="text" class="form-control" name="v_code" placeholder="Validation code" required>
+                                <span style="position: absolute; top: 5px; right: 10px; font-size: 18px; font-weight: bold;">85471</span>
+                                                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="checkbox">
+                                <label>
+                                    <input type="checkbox" name="remember" > Remember Me
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-primary">
+                                Login
+                            </button>
+                        </div>
+                        <div class="row" style="color: #b9bbbe">
+                            ©️ RamaBet.COM
+                            
+
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
+
+
+================================================================================
+
+================================================================================
+Time: December 22, 2019, 9:20 am
+Duration: 0.306
+Header: {"host":["localhost"],"connection":["keep-alive"],"cache-control":["max-age=0"],"upgrade-insecure-requests":["1"],"user-agent":["Mozilla\/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit\/537.36 (KHTML, like Gecko) Chrome\/79.0.3945.88 Safari\/537.36"],"sec-fetch-user":["?1"],"accept":["text\/html,application\/xhtml+xml,application\/xml;q=0.9,image\/webp,image\/apng,*\/*;q=0.8,application\/signed-exchange;v=b3;q=0.9"],"sec-fetch-site":["none"],"sec-fetch-mode":["navigate"],"accept-encoding":["gzip, deflate, br"],"accept-language":["en-US,en;q=0.9,ko;q=0.8"],"cookie":["XSRF-TOKEN=eyJpdiI6IkdNOTZ5Ujc3a093Z3lYUUtOSVU0Snc9PSIsInZhbHVlIjoiMGFuemJmaUtaRTZid0NRb3RkaXdXUWZvUkRxckNQbXUwZTM0d2FNVXRGd1c3SlBha01RM0xwV2pcLzhvR2Y3aXNGaURPTU0zMGozS1RHUWwzMVp4bHFnPT0iLCJtYWMiOiIwMmY4MjAzNzRmODM4YzBiZGI0ODBiZjNhNDdhZTMzMzg5OTUyNzE2ZGU5M2RlNGMxMTIwMzkxZjNiOWY4NGIwIn0%3D; laravel_session=eyJpdiI6IlwvRTBrMlBoN3dBQzNKOWIyQ0hFa1dnPT0iLCJ2YWx1ZSI6IkxqYWZUYjcrR1Y2ZkMzS0ZNT2t0RFR3NjFjcm54VTVsNHF2bnNhUFZCeHNCTkFxQlN6cUpHVk5XTUNXNnhOUldZTG1EdURWWVpXK1UzRzBjSHo5K1pBPT0iLCJtYWMiOiJiNzI0MzU2OGM3MTA0NzE4MjRlYWRlZTkxMGIxZDk4MmQ4YzlmZjVhYTZjNmEwMDdjYTYyNzAxMTlmZWMyODY2In0%3D"]}
+IP Address: 127.0.0.1
+URL: http://localhost/ramaex1208/mobile/login
+Method: GET
+Input: 
+Output: <!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>RamaBet</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,height=device-height, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+    <script defer src="https://use.fontawesome.com/releases/v5.7.2/js/all.js" integrity="sha384-0pzryjIRos8mFBWMzSSZApWtPl/5++eIfzYmTgBBmXYdhvxPc+XcFEk+zJwDgWbP" crossorigin="anonymous"></script>
+
+
+
+    <!-- Fonts -->
+    <link rel="dns-prefetch" href="//fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet" type="text/css">
+
+    <!-- Styles -->
+
+    <style>
+        html {
+            height: 100%;
+            display: table;
+            width: 100%;
+        }
+        body{
+
+            display: contents;
+        }
+        @media  screen and (max-width: 767px) {
+
+        }
+        form{
+            color: black;
+
+            border-radius: 10px;
+            padding: 22px;
+            text-align: center;
+            max-width: 511px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .mobile_show form .form-control{
+            border-radius: 30px;
+            background-color: #0b5ca0;
+            color: #fffafa;
+            border: 0;
+        }
+        .mobile_hide form{
+            background-color: white;
+        }
+        .login_image{
+            position: relative;
+            background-image: url("http://localhost/ramaex1208/public/img/login.jpg");
+            height: 50%;
+            background-position: top;
+            background-size: cover;
+            z-index: 100;
+            border-radius: 61%/0 0 92px 92px;
+        }
+        @media (max-width: 767px) {
+            .mobile_hide {
+                display: none !important;
+            }
+
+            .mobile_show {
+                display: block !important;
+            }
+        }
+        .mobile_show {
+            display: none;
+        }
+        .login-page {
+            /*background-image: url("/public/img/admin_login.jpg") !important;*/
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: cover;
+            padding-left: 0;
+            margin: auto !important;
+            height: 100%;
+            padding-top: 16%;
+            overflow-x: hidden;
+        }
+    </style>
+</head>
+<body>
+<div class="mobile_show">
+    <div class="login_image">
+        <div class="" style="min-width:300px;width: 60%;margin-bottom: 20px; margin: auto;text-align: center;color: white;padding-top: 184px" >
+            <a class="" href="http://localhost/ramaex1208"><img height="35px" src="http://localhost/ramaex1208/public/img/logo1.png" style="width: 100%;height: auto;max-width: 500px"></a>
+            
+        </div>
+    </div>
+    <div class="container-fluid" style="position: absolute;top: 24%;width: 100%;background-color: rgb(11,56,98);">
+        <div class="row" style="border-radius: 50px; margin-top: 50%; padding: 20px; height: 50%;">
+                                        <form method="POST" action="http://localhost/ramaex1208/login">
+                <input type="hidden" name="_token" value="TldrJt9niz1Y4LjY34q14VrM9Aq28ldhxvxGill7">
+                
+                <div class="form-group">
+                    
+
+                    <div class="">
+                        <input id="identity" type="text" class="form-control" name="identity" value="" placeholder="User name" required autofocus>
+
+                                            </div>
+                </div>
+
+                <div class="form-group" style="margin-top: 20px">
+                    
+
+                    <div class="">
+                        <input id="password" type="password" class="form-control" name="password" placeholder="Password" required>
+
+                                            </div>
+                </div>
+                <div class="form-group" style="margin-top: 20px">
+                    
+                    <div class="" style="position: relative">
+                                                <input type="hidden" class="form-control" name="v_code1" value="70358">
+                        <input type="text" class="form-control" name="v_code" placeholder="Validation code" required>
+                        <span style="position: absolute; top: 5px; right: 10px; font-size: 18px; font-weight: bold;">70358</span>
+                                            </div>
+                </div>
+                <div class="form-group">
+                    <div class="checkbox">
+                        <label>
+                            <input type="checkbox" name="remember" > Remember Me
+                        </label>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary">
+                        Login
+                    </button>
+                </div>
+                <div class="row" style="color: #b9bbbe">
+                    ©️ RamaBet.com
+                    
+
+                </div>
+            </form>
+        </div>
+
+    </div>
+</div>
+<div class="mobile_hide login-page">
+    <div class="login-box">
+        <div class="logo">
+            <div class=""
+                 style="min-width:300px;width: 60%;margin-bottom: 20px; margin: auto;text-align: center;color: white;">
+                <a class="" href="http://localhost/ramaex1208"><img height="35px" src="http://localhost/ramaex1208/public/img/logo1.png"
+                                                     style="width: 100%;height: auto;max-width: 500px"></a>
+                
+            </div>
+        </div>
+        <div class="card" style="opacity: .8">
+            <div class="body">
+                <div class="row" style="border-radius: 50px; height: 50%;">
+                    <form method="POST" action="http://localhost/ramaex1208/login">
+                        <input type="hidden" name="_token" value="TldrJt9niz1Y4LjY34q14VrM9Aq28ldhxvxGill7">
+                        
+                        <div class="form-group">
+                            
+
+                            <div class="">
+                                <input id="identity" type="text" class="form-control" name="identity" value="" placeholder="User name" required autofocus>
+
+                                                            </div>
+                        </div>
+
+                        <div class="form-group" style="margin-top: 20px">
+                            
+
+                            <div class="">
+                                <input id="password" type="password" class="form-control" name="password" placeholder="Password" required>
+
+                                                            </div>
+                        </div>
+                        <div class="form-group" style="margin-top: 20px">
+                            
+                            <div class="" style="position: relative">
+                                                                <input type="hidden" class="form-control" name="v_code1" value="85471">
+                                <input type="text" class="form-control" name="v_code" placeholder="Validation code" required>
+                                <span style="position: absolute; top: 5px; right: 10px; font-size: 18px; font-weight: bold;">85471</span>
+                                                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="checkbox">
+                                <label>
+                                    <input type="checkbox" name="remember" > Remember Me
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-primary">
+                                Login
+                            </button>
+                        </div>
+                        <div class="row" style="color: #b9bbbe">
+                            ©️ RamaBet.COM
+                            
+
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
+
+
+================================================================================
+

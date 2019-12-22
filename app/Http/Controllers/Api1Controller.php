@@ -489,6 +489,12 @@ class Api1Controller extends Controller
         }
         return \response(json_encode(['count'=>$r_count,'request url'=>$url,'request url1'=>$url1,'data'=>$res2,'data1'=>$f_marketIds,'note'=>['link' => $res1, 'message' => 'update odd', 'type' => 'update odd', 'user_type' => 'users'],'matchedBet'=>$matchedBet,'fancyBets'=>$fancyBets,'markets'=>$markets,'insert_runners'=>$insert_runners]));
     }
+    public function viewOdd($marketIds){
+        $url=$this->host.':8001/api/betfair/'.$marketIds;
+        //$res='test';
+        $res=$this->curl($url);
+        return \response()->json($res);
+    }
     public function insertRunner(){
         $api=new ApiController();
         $res1=array();
