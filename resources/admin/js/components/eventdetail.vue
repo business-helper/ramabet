@@ -657,7 +657,7 @@
                                                     <input v-model="runner.is_update" type="checkbox"
                                                            :id="'is_update'+runner.id" class="filled-in"
                                                            v-on:change="updateShowState(runner)">
-                                                    <label :for="'is_update'+runner.id">C</label>
+                                                    <label :for="'is_update'+runner.id">U/M</label>
                                                 </div>
                                             </div>
                                         </td>
@@ -680,7 +680,6 @@
                                                             --
                                                         </div>
                                                     </transition>
-
                                                 </div>
                                                 <div class=" notranslate"
                                                      style="justify-content: flex-end;-webkit-justify-content: flex-end">
@@ -699,7 +698,6 @@
                                                             --
                                                         </div>
                                                     </transition>
-
                                                 </div>
                                             </div>
                                             <div class="selectTemp" v-else>
@@ -721,7 +719,6 @@
                                                     <div v-else class="right_item">
                                                         --
                                                     </div>
-
                                                 </div>
                                                 <div class=" notranslate"
                                                      style="justify-content: flex-end;-webkit-justify-content: flex-end">
@@ -740,7 +737,6 @@
                                                     <div v-else class="left_item">
                                                         --
                                                     </div>
-
                                                 </div>
                                             </div>
                                             <div v-if="runner.runnerStatus=='SUSPENDED' || runner.runnerStatus=='CLOSED' || runner.runnerStatus=='CANCELED'"
@@ -748,7 +744,6 @@
                                                  style="font-size: 14px;background-color: rgba(100, 100, 100, 0.6); color: white; font-weight: 500; justify-content: center; border: 1px solid; align-items: center;">
                                                 {{runner.runnerStatus}}
                                             </div>
-
                                         </td>
                                         <td style="padding: 0; text-align: center; vertical-align: middle;">
                                             <button type="button" class="btn bg-green waves-effect" style="margin: auto"
@@ -841,7 +836,6 @@
                                 <div style="text-align: right; padding-right: 20px;">
                                     <button class="btn bg-green waves-effect" @click="updateMarketVol">Update</button>
                                 </div>
-
                             </div>
                             <div :id="'management'+this.currentMarketId" class="tab-pane fade">
                                 <div style="display: flex;flex-wrap: wrap;">
@@ -858,14 +852,6 @@
                                         <input v-model="market_management.maxProfit" type="number"
                                                class="form-control"/>
                                     </div>
-                                    <!--<div class="sport_item">-->
-                                    <!--<h6>Pre Inplay Profit</h6>-->
-                                    <!--<input v-model="market_management.preInplayProfit" type="number" class="form-control"/>-->
-                                    <!--</div>-->
-                                    <!--<div class="sport_item">-->
-                                    <!--<h6>Pre Inplay Stake</h6>-->
-                                    <!--<input v-model="market_management.preInplayStake" type="number" class="form-control"/>-->
-                                    <!--</div>-->
                                     <div class="sport_item">
                                         <h6>Delay In Second</h6>
                                         <input v-model="market_management.delaySec" type="number" class="form-control"/>
@@ -1284,31 +1270,23 @@
                     console.log('error ', error)
                 })
                 var data = uuidv1();
-
                 axios.defaults.headers.common.Authtype = 'tf2-' + this.$User.id + '-' + data;
-                //axios.defaults.headers.common.Authtype =  'tf2-'+this.$User.id+'-'+data;
                 axios.defaults.headers.common.Authentication = md5('tf2-' + this.$User.id + '-' + data + this.$User.login_session + 'tcgtchkmk1014');
                 window.axios.post('/api/updateShowRunner', {runner: runner}).then(({data}) => {
                     //showNotification("alert-success", data.message, "bottom", "right", "animated lightSpeedIn", "animated lightSpeedOut");
-
                 });
-                console.log(status, runner)
             },
             setSessionResult(status, runner) {
                 if (status == 'CLOSED') {
                     runner.score = $('#score_' + runner.id).val();
                     if (runner.score < 0) return showNotification("alert-success", 'Invalid score', "bottom", "right", "animated lightSpeedIn", "animated lightSpeedOut");
                 }
-
-
                 runner.runnerStatus = status;
                 var data = uuidv1();
-
                 axios.defaults.headers.common.Authtype = 'tf2-' + this.$User.id + '-' + data;
                 axios.defaults.headers.common.Authentication = md5('tf2-' + this.$User.id + '-' + data + this.$User.login_session + 'tcgtchkmk1014');
                 window.axios.post('/api/setResultOfSession', {runner: runner}).then(({data}) => {
                     showNotification("alert-success", data.message, "bottom", "right", "animated lightSpeedIn", "animated lightSpeedOut");
-
                     Event.$emit('setResultOfMarket', '');
                     var starCountRef = this.$firebase.database().ref('/');
                     var Declare = data.data;
@@ -1326,13 +1304,11 @@
             },
             getScoreBook(runner_id, runnerName) {
                 console.log(runner_id)
-                //Event.$emit('scoreBook',runner_id,runnerName);
                 this.scoreBookRunner = runnerName;
                 this.readScoreBook(runner_id);
             },
             readScoreBook(runner_id) {
                 var data = uuidv1();
-
                 axios.defaults.headers.common.Authtype = 'tf2-' + this.$User.id + '-' + data;
                 axios.defaults.headers.common.Authentication = md5('tf2-' + this.$User.id + '-' + data + this.$User.login_session + 'tcgtchkmk1014');
                 window.axios.post('/api/getScoreBook', {
@@ -1346,9 +1322,6 @@
                         draggable: true,
                         resizable: true
                     })
-                    //scoreBook
-                    //Event.$emit('betSlipLoading','hide');
-                    //showNotification("alert-success", data.message, "top", "right", "animated lightSpeedIn", "animated lightSpeedOut");
                 }).catch(function (resp) {
                     console.log(resp);
                 });
@@ -1356,7 +1329,6 @@
             updateOdd() {
                 console.log(this.custom_runner);
                 var data = uuidv1();
-
                 axios.defaults.headers.common.Authtype = 'tf2-' + this.$User.id + '-' + data;
                 axios.defaults.headers.common.Authentication = md5('tf2-' + this.$User.id + '-' + data + this.$User.login_session + 'tcgtchkmk1014');
                 window.axios.post('/api/updateOdd', {runners: this.custom_runner}).then(({data}) => {
@@ -1389,7 +1361,6 @@
             },
             delMarkets(market_id) {
                 var data = uuidv1();
-
                 axios.defaults.headers.common.Authtype = 'tf2-' + this.$User.id + '-' + data;
                 axios.defaults.headers.common.Authentication = md5('tf2-' + this.$User.id + '-' + data + this.$User.login_session + 'tcgtchkmk1014');
                 window.axios.post('/api/delMarkets', {market_id: this.market_id}).then(({data}) => {
@@ -1400,9 +1371,7 @@
             },
             setMarketResult(val) {
                 console.log(this.market_result, this.currentMarketId);
-                //return;
                 var data = uuidv1();
-
                 axios.defaults.headers.common.Authtype = 'tf2-' + this.$User.id + '-' + data;
                 axios.defaults.headers.common.Authentication = md5('tf2-' + this.$User.id + '-' + data + this.$User.login_session + 'tcgtchkmk1014');
                 window.axios.post('/api/setMarketResult', {
@@ -1410,7 +1379,6 @@
                     market_result: val,
                     user_id: this.$userId
                 }).then(({data}) => {
-
                     showNotification("alert-success", data.message, "bottom", "right", "animated lightSpeedIn", "animated lightSpeedOut");
                     var starCountRef = this.$firebase.database().ref('/Declare');
                     var market = data.data
@@ -1423,13 +1391,6 @@
                         //error callback
                         console.log('error ', error)
                     })
-                    /*if (this.multi_market === '1') {
-                        this.read(this.market_id);
-                    }
-                    else {
-                        this.read1();
-                    }*/
-                    //Event.$emit('setResultOfMarket','');
                 });
             },
             Undeclare() {
