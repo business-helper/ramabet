@@ -38,17 +38,13 @@
             </div>
             <div id="liveStatus" class="tab-pane fade">
                 <div class="box box-primary Dcursor" tabindex="1">
-                    <!--<div class="box-header bgblack" style="color: white;">-->
-                        <!--Live Match Status-->
-                        <!--<div style="height: auto; width: 40px; float: right; padding-top: 0px;">-->
-                            <!--&lt;!&ndash;<button class="btn btn-box-tool" style="padding: 0px; padding-right: 2px; color: white;"-->
-                                     <!--data-widget="collapse"><i class="fa fa-plus"></i></button>&ndash;&gt;-->
-                        <!--</div>-->
-                    <!--</div>-->
                     <div class="box-body" style="text-align: center">
-                        <iframe id="BFVideoFrame" class="player" frameborder="0" width="358" height="250"
+                        <iframe class="player" frameborder="0" width="334" height="190"
+                                 scrolling="no" :key="this.event_id"
+                                 :src="'https://videoplayer.betfair.com/GetPlayer.do?eID='+this.event_id+'&width=334&height=190&contentType=viz&contentOnly=false'"></iframe>
+                        <iframe class="player" frameborder="0" width="334" height="190"
                                 scrolling="no" :key="this.event_id"
-                                :src="'https://videoplayer.betfair.com/GetPlayer.do?eID='+this.event_id+'&width=358&height=250&contentType=viz&contentOnly=false'"></iframe>
+                                :src="'https://videoplayer.betfair.com/GetPlayer.do?tr=1&eID='+this.event_id+'&width=334&height=190&contentType=viz&contentOnly=false&contentView=mstats&statsToggle=hide'"></iframe>
                     </div>
 
                 </div>
