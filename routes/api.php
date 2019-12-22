@@ -155,6 +155,7 @@ Route::prefix('betfair/v1')->group(function (){
     Route::get('under_over_goal_market_list/{event_id}', 'Api1Controller@under_over_goal_market_list');
     Route::get('activate_b/{event_id}', 'Api1Controller@activate_b');
     Route::get('getOdd/{r_count}', 'Api1Controller@getOdd');
+    Route::get('viewOdd/{marketIds}', 'Api1Controller@viewOdd');
     Route::get('market_book_list/{market_id}', 'Api1Controller@market_book_list');
     Route::get('getSportIds', 'Api1Controller@getSportIds');
     Route::get('testing', 'Api1Controller@testing');
