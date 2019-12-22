@@ -472,6 +472,7 @@ class Api1Controller extends Controller
                 }else{
                     $runner=Runner::find($is_runner);
                     if ($runner->state==1)continue;
+                    if ($runner->is_update==0)continue;
                     $runner->runnerId=$item1->SelectionId;
                     $runner->runnerName=$item1->RunnerName;
                     $runner->runnerStatus=$item1->GameStatus;
