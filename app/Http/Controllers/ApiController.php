@@ -1299,7 +1299,7 @@ class ApiController extends Controller
     public function updateShowRunner(){
         $this->authorization(\request()->header('authtype'),\request()->header('authorization'),\request()->header('authentication'));
         $runner = json_decode(json_encode(\request('runner')));
-        Runner::where('id', $runner->id)->update(['is_show'=>$runner->is_show]);
+        Runner::where('id', $runner->id)->update(['is_show'=>$runner->is_show,'is_update'=>$runner->is_update]);
         return $this->response(0,''.$runner->id,'');
     }
     public function setResultOfSession()

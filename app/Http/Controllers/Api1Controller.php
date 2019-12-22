@@ -344,7 +344,7 @@ class Api1Controller extends Controller
             'events','events.id','markets.event_id'
         )
             ->whereNotIn('markets.marketStatus',['CLOSED','CANCELED'])
-            ->where([['markets.isUpdate', 1],['markets.marketName','<>','Fancy Markets'],['events.sport_id',4],['events.time','>',Carbon::now()->subHour(24)]])->take(100)->skip($r_count*100)->pluck('markets.marketId')->unique();
+            ->where([['markets.marketName','<>','Fancy Markets'],['events.sport_id',4],['events.time','>',Carbon::now()->subHour(24)]])->pluck('markets.marketId')->unique();
         //return $marketIds;
         $marketIds=$marketIds->values()->all();
         //return json_encode($marketIds);
@@ -472,7 +472,7 @@ class Api1Controller extends Controller
                 }else{
                     $runner=Runner::find($is_runner);
                     if ($runner->state==1)continue;
-                    if ($runner->is_update==0)continue;
+                    //if ($runner->is_update==0)continue;
                     $runner->runnerId=$item1->SelectionId;
                     $runner->runnerName=$item1->RunnerName;
                     $runner->runnerStatus=$item1->GameStatus;
