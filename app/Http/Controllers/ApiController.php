@@ -568,6 +568,7 @@ class ApiController extends Controller
         }
         foreach ($markets as $item){
             $temp=DB::table('markets')->where([['marketId',$item->marketId],['marketName','Match Odds']])->first();
+            if (!isset($temp))continue;
             if ($temp->is_active!=1)continue;
             if ($temp->marketStatus=='CLOSED' or $temp->marketStatus=='CANCELED' )continue;
             $f_markets[]=$item;
