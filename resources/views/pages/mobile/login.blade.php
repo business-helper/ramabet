@@ -23,6 +23,7 @@
             height: 100%;
             display: table;
             width: 100%;
+            background-color: rgb(11,56,98);
         }
         body{
 
@@ -84,11 +85,11 @@
         }
     </style>
 </head>
-<body>
+<body >
 <div class="mobile_show">
     <div class="login_image">
         <div class="" style="min-width:300px;width: 60%;margin-bottom: 20px; margin: auto;text-align: center;color: white;padding-top: 184px" >
-            <a class="" href="{{url('/')}}"><img height="35px" src="{{asset('img/logo1.png')}}" style="width: 100%;height: auto;max-width: 500px"></a>
+            <a class="" href="{{url('/')}}"><img height="35px" src="{{asset('img/logo.png')}}" style="width: 100%;height: auto;max-width: 500px"></a>
             {{-- <img src="{{asset('img/powered.png')}}" style="width: 60%"/>--}}
         </div>
     </div>
@@ -188,7 +189,7 @@
         <div class="logo">
             <div class=""
                  style="min-width:300px;width: 60%;margin-bottom: 20px; margin: auto;text-align: center;color: white;">
-                <a class="" href="{{url('/')}}"><img height="35px" src="{{asset('img/logo1.png')}}"
+                <a class="" href="{{url('/')}}"><img height="35px" src="{{asset('img/logo.png')}}"
                                                      style="width: 100%;height: auto;max-width: 500px"></a>
                 {{-- <img src="{{asset('img/powered.png')}}" style="width: 60%"/>--}}
             </div>

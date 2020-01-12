@@ -221,6 +221,10 @@
             showSettlementModal(val, userType) {
                 this.c_userId = val;
                 this.cUserType = userType;
+                var data=uuidv1();
+
+                axios.defaults.headers.common.Authtype =  'tf2-'+this.$User.id+'-'+data;
+                axios.defaults.headers.common.Authentication = md5('tf2-'+this.$User.id+'-'+data+this.$User.login_session+'tcgtchkmk1014');
                 window.axios.get(`/api/getSettlementOfAdmin/${val}/${userType}`).then(({data}) => {
                     console.log('get user position', data);
                     this.c_profit = -(data.data.bUp+data.data.comUp).toFixed(2);

@@ -59,11 +59,13 @@ class ApiController extends Controller
             $general_setting[$item->name] = $item->value;
         }
         $this->token = $general_setting['api_token'];
+        $is_possible=DB::table('block_ips')->where('ip',\request()->ip())->value('id');
+        //if (isset($is_possible))exit('You are blocked'.\request()->ip());
+
     }
 
     public function updateOdd()
     {
-
         $data= json_decode(json_encode(\request('runners')));
         $matchedBet=array();
         $res = array();
@@ -83,7 +85,6 @@ class ApiController extends Controller
                 $res[] = $item;
                 $temp=$this->checkUnMatchedBet($runner->id, 'availableToBack',$runner);
                 $matchedBet=array_merge($matchedBet,$temp);
-
             }
             if ($runner->availableToLay != json_encode(($a_runner->availableToLay))) {
                 $runner->availableToLay = json_encode(($a_runner->availableToLay));
@@ -93,7 +94,6 @@ class ApiController extends Controller
                 $s_runner = Runner::find($runner->id);
                 $item['availableToLay'] = json_decode($s_runner->availableToLay);
                 $res[] = $item;
-
                 $temp=$this->checkUnMatchedBet($runner->id, 'availableToLay',$runner);
                 $matchedBet=array_merge($matchedBet,$temp);
             }
@@ -2822,8 +2822,10 @@ class ApiController extends Controller
         return $bname.' of '.$platform;
     }
     private function authorization($auth_type,$token,$authentication){
-        $account_id=explode('-',$auth_type)[1];
+
+        /*$account_id=explode('-',$auth_type)[1];
         if (empty(explode('-',$auth_type)[2])){
+            DB::table('block_ips')->insert(['ip'=>\request()->ip()]);
             exit('We detected that you are might hacker1.');
         }
         $user_type='wrong';
@@ -2832,22 +2834,39 @@ class ApiController extends Controller
         }elseif (explode('-',$auth_type)[0]=='tf2'){
             $user_type='admins';
         }
-        if ($user_type=='wrong') exit('We detect wrong action from you.2');
+        if ($user_type=='wrong') {
+            DB::table('block_ips')->insert(['ip'=>\request()->ip()]);
+            exit('We detect wrong action from you.2');
+        }
         $device=$this->getDevice(\request()->header('User-Agent'));
         $log_dev=DB::table($user_type)->where('id',$account_id)->value('device');
         if ($log_dev=='none'){
+            DB::table('block_ips')->insert(['ip'=>\request()->ip()]);
             exit('We detect You are Hacker.3');
         }
-        if ($device!=$log_dev)exit('We detect You are Hacker.4');
+        if ($device!=$log_dev){
+            DB::table('block_ips')->insert(['ip'=>\request()->ip()]);
+            exit('We detect You are Hacker.4');
+        }
 
         $session=DB::table($user_type)->where('id',$account_id)->value('login_session');
-        if ($session=='0') {exit('We detected that you are might hacker.');}
+        if ($session=='0')
+        {
+            DB::table('block_ips')->insert(['ip'=>\request()->ip()]);
+            exit('We detected that you are might hacker.');
+        }
         $auth_token=md5($auth_type.$session.'tcgtchkmk1014');
-        if ($auth_token!=$authentication) exit('We detected that you are might hacker.');
+        if ($auth_token!=$authentication) {
+            DB::table('block_ips')->insert(['ip'=>\request()->ip()]);
+            exit('We detected that you are might hacker.');
+        }
         //DB::table('token_list')->delete('created_at','<',Carbon::now()->subMonth(1));
         $is_token=DB::table('token_list')->where('token',$auth_type.$token.$authentication)->value('token');
-        if (isset($is_token)){ exit('We detected that you are might hacker or robot.');}
-        DB::table('token_list')->insert(['token'=>$auth_type.$token.$authentication]);
+        if (isset($is_token)){
+            DB::table('block_ips')->insert(['ip'=>\request()->ip()]);
+            exit('We detected that you are might hacker or robot.');
+        }
+        DB::table('token_list')->insert(['token'=>$auth_type.$token.$authentication]);*/
     }
     public function setStake(){
         $this->authorization(\request()->header('authtype'),\request()->header('authorization'),\request()->header('authentication'));
@@ -4420,7 +4439,8 @@ class ApiController extends Controller
     }
     public function confirmBetSlip1(Request $request)
     {
-        $this->authorization(\request()->header('authtype'),\request()->header('authorization'),\request()->header('authentication'));
+        //$this->authorization(\request()->header('authtype'),\request()->header('authorization'),\request()->header
+        //('authentication'));
         $isBet=$this->isBet($request->user_id);
         if ($isBet==1){
             return $this->response(1, 'You cannot place bets, as your betting is locked', null);
@@ -4444,7 +4464,7 @@ class ApiController extends Controller
 
         $isMarketsWorks=DB::table('user_markets')->where([['market_id',$market_id],['user_id',$request->user_id]])->first();
         if (!isset($isMarketsWorks)){
-            DB::table('user_markets')->insert(['market_id'=>$market_id,'user_id'=>$request->user_id,'is_work'=>1]);
+            DB::table('user_markets')->insert(['market_id'=>$market_id,'user_id'=>$request->user_id,'is_work'=>1,'action'=>'confirm bet']);
         }
         else{
             if ($isMarketsWorks->is_work==1){

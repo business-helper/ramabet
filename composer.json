@@ -16,7 +16,8 @@
         "paypal/rest-api-sdk-php": "^1.14",
         "pusher/pusher-php-server": "~2.6",
         "stevebauman/location": "^3.0",
-        "stripe/stripe-php": "^6.29"
+        "stripe/stripe-php": "^6.29",
+      "ext-json": "*"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

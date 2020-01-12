@@ -28,12 +28,13 @@ class Api1Controller extends Controller
      *
      * @return void
      */
-    private $host='http://52.208.223.36';
+    private $host='http://34.251.241.195';
     private $firebase;
     public function __construct()
     {
         ini_set('memory_limit', '-1');
         ini_set('max_execution_time', 300);
+        ini_set( 'serialize_precision', -1 );
         $this->firebase=new FirebaseController();
     }
 
@@ -61,6 +62,7 @@ class Api1Controller extends Controller
             }
             if ($seriesList==null)continue;
             foreach ($seriesList as $series) {
+                if (!isset($series->competition->id))continue;
                 $is_check = League::where('import_id', $series->competition->id)->value('id');
                 if (isset($is_check)) {
                     $league = League::find($is_check);
@@ -103,9 +105,13 @@ class Api1Controller extends Controller
         $url=$this->host.'/betfair/event_list_by_competition/'.$league->import_id;
         $matcheList = $this->curl($url);
         $res=$matcheList;
+
         if (!isset($res)){
             League::where('id',$league_id)->delete();
             return \response(json_encode(['request url'=>$url,'data'=>$res]));
+        }
+        if (isset($res->Error)){
+            return \response()->json($res);
         }
         foreach ($matcheList as $match) {
             $is_check = Event::where('import_id', $match->event->id)->value('id');
@@ -145,11 +151,13 @@ class Api1Controller extends Controller
     }
     public function market_catalogue_list($r_count){
         //request()->ip()
-        $event_ids = Event::where([['events.is_fresh', 'true'], ['events.is_active', 'true'],['events.time', '>', Carbon::now()->subHour(12)], ['events.time', '<', Carbon::now()->addHour(48)] ])->take(200)->skip($r_count*200)->pluck('events.import_id');
+        $event_ids = Event::where([['events.is_fresh', 'true'], ['events.is_active', 'true'],['events.time', '>',
+            Carbon::now()->subHour(12)], ['events.time', '<', Carbon::now()->addHour(48)] ])->take(10)->skip
+        ($r_count*10)->pluck('events.import_id');
 
         $count=count($event_ids);
         $r_count++;
-        if ($count<200)$r_count=0;
+        if ($count<10)$r_count=0;
 
         $event_ids=implode(",",json_decode(json_encode($event_ids)));
         $url=$this->host.'/betfair/market_catalogue_list/'.$event_ids;
@@ -158,6 +166,7 @@ class Api1Controller extends Controller
         foreach ($res as $item){
             /*$url1=$this->host.'/api/betfair/activate_b/'.$item->marketId;
             $this->curl($url1);*/
+            if (!isset($item->event->id))continue;
             $event_id=Event::where('import_id',$item->event->id)->value('id');
             if (!isset($event_id))continue;
             $is_market=Market::where('marketId',$item->marketId)->value('id');
@@ -363,6 +372,7 @@ class Api1Controller extends Controller
         $markets=array();
         $index=0;
         $insert_runners=[];
+        if (gettype($res)=='array' or gettype($res)=='object')
         foreach ($res as $item){
             if ($item==null){
                 $url1=$this->host.'/api/betfair/activate_b/'.$marketIdList[$index];
@@ -426,12 +436,13 @@ class Api1Controller extends Controller
 
         $url1=$this->host.':8002/api/dream/'.$marketIds;
         //$res='test';
-        $res=$this->curl($url1);
+        $f_res=$this->curl($url1);
         $index=0;
         $res2=array();
         $fancyBets=array();
         if (count($f_marketIds)>0)
-        foreach ($res as $item){
+            if (gettype($f_res)=='array' or gettype($f_res)=='object')
+        foreach ($f_res as $item){
             $marketId=$f_marketIds[$index];
             $index++;
             if ($item==null)continue;
@@ -487,7 +498,7 @@ class Api1Controller extends Controller
                 }
             }
         }
-        return \response(json_encode(['count'=>$r_count,'request url'=>$url,'request url1'=>$url1,'data'=>$res2,'data1'=>$f_marketIds,'note'=>['link' => $res1, 'message' => 'update odd', 'type' => 'update odd', 'user_type' => 'users'],'matchedBet'=>$matchedBet,'fancyBets'=>$fancyBets,'markets'=>$markets,'insert_runners'=>$insert_runners]));
+        return \response(json_encode(['count'=>$r_count,'request url'=>$url,'request url1'=>$url1,'data'=>$res,'data1'=>$f_res,'note'=>['link' => $res1, 'message' => 'update odd', 'type' => 'update odd', 'user_type' => 'users'],'matchedBet'=>$matchedBet,'fancyBets'=>$fancyBets,'markets'=>$markets,'insert_runners'=>$insert_runners]));
     }
     public function viewOdd($marketIds){
         $url=$this->host.':8001/api/betfair/'.$marketIds;
@@ -519,6 +530,26 @@ class Api1Controller extends Controller
             $info = curl_getinfo($ch);
             curl_close($ch);
             die('error occured during curl exec. Additioanl info: ' . var_export($info));
+        }
+        curl_close($ch);
+        return json_decode($data);
+    }
+    public function testcurl()
+    {
+        //$url = 'https://api.betsapi.com/v1/events/ended?token=YOUR_TOKEN&sport_id=1';
+        $url=\request('url');
+        $ch = curl_init($url);
+        curl_setopt($ch, CURLOPT_TIMEOUT, 5);
+        curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 5);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);
+        $data = curl_exec($ch);
+        if ($data === false) {
+            $info = curl_getinfo($ch);
+            $error_msg = curl_error($ch);
+            curl_close($ch);
+            die('error occured during curl exec. Additioanl info: ' . var_export($info).'/'.$error_msg);
         }
         curl_close($ch);
         return json_decode($data);

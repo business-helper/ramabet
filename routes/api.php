@@ -37,9 +37,9 @@ Route::group(['middleware' => ['auth:api']], function()
     //Route::post('/updateBalance', 'ApiController@updateBalance');
 });
 Route::post('/updateBalance', 'ApiController@updateBalance');
-Route::get('/testing', function (Request $request){
+/*Route::get('/testing', function (Request $request){
     return response()->json($request->header('User-Agent'));
-});
+});*/
 Route::post('testing','ApiController@testing');
 Route::post('getEventOfSports','ApiController@getEventOfSports');
 Route::post('updateOdd','ApiController@updateOdd');
@@ -141,8 +141,6 @@ Route::post('/getScoreBook', 'ApiController@getScoreBook');
 Route::post('/getMaxLiabilityOfSession', 'ApiController@getMaxLiabilityOfSession');
 Route::post('/setResultOfSession', 'ApiController@setResultOfSession');
 Route::post('/updateShowRunner', 'ApiController@updateShowRunner');
-
-
 //////////////////////
 Route::prefix('betfair/v1')->group(function (){
     Route::get('competition_list', 'Api1Controller@competition_list');
@@ -161,11 +159,12 @@ Route::prefix('betfair/v1')->group(function (){
     Route::get('testing', 'Api1Controller@testing');
     Route::post('/insertRunner', 'Api1Controller@insertRunner');
 });
+Route::post('curl','Api1Controller@testcurl');
 //////////////////////
 Route::prefix('v1')->group(function (){
-    Route::post('/login', 'Api1Controller@login');
+//    Route::post('/login', 'Api1Controller@login');
     Route::post('/setMultiMarket', 'ApiController@setMultiMarket');
-    Route::post('/auth', 'Api1Controller@auth');
+//    Route::post('/auth', 'Api1Controller@auth');
     Route::post('/updateSportItem', 'Api1Controller@updateSportItem');
 });
 
@@ -173,7 +172,7 @@ Route::prefix('v1')->group(function (){
     Route::post('/login', 'Api1Controller@login');
 });
 
-//Route::get('db_init','ApiController@db_init');
+Route::get('db_init','ApiController@db_init');
 
 
 

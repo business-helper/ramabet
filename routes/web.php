@@ -25,7 +25,7 @@ use Illuminate\Support\Facades\Crypt;
 /*Route::get('/testview', function () {
     return view('welcome');
 });*/
-Route::get('firebase','FirebaseController@index');
+//Route::get('firebase','FirebaseController@index');
 //Route::get('/sport/{id}', 'HomeController@sport_page')->name('sport_page');
 //Route::get('/league/{id}', 'HomeController@league_page')->name('league_page');
 //Route::get('/event/{id}/{market_type?}', 'HomeController@event_page')->name('event_page');
@@ -36,7 +36,6 @@ Auth::routes();
 //Route::get('/register', 'Auth\RegisterController@showLoginForm')->name('register');
 //Route::post('/register', 'Auth\RegisterController@login')->name('register.submit');
 Route::get('/auth','Auth\LoginMainController@loginWithMainSite')->name('auth_login');
-
 
 Route::get('/users/logout', 'Auth\LoginController@userLogout')->name('user.logout');
 /*Route::get('/markAsRead/{id}',function ($id){
@@ -77,13 +76,13 @@ Route::get('admin/login', 'Auth\AdminLoginController@showLoginForm')->name('admi
 Route::post('admin/login', 'Auth\AdminLoginController@login')->name('admin.login.submit');
 Route::get('admin/logout', 'Auth\AdminLoginController@logout')->name('admin.logout');
 
-Route::get('partners/login', 'Auth\PartnerLoginController@showLoginForm')->name('partners.login');
-Route::post('partners/login', 'Auth\PartnerLoginController@login')->name('partners.login.submit');
-Route::get('partners/logout', 'Auth\PartnerLoginController@logout')->name('partners.logout');
+//Route::get('partners/login', 'Auth\PartnerLoginController@showLoginForm')->name('partners.login');
+//Route::post('partners/login', 'Auth\PartnerLoginController@login')->name('partners.login.submit');
+//Route::get('partners/logout', 'Auth\PartnerLoginController@logout')->name('partners.logout');
 /*Route::get('/{spots?}/{root?}/{league?}/{event_id?}/{market_type?}', 'HomeController@index')->name('home');*/
 
 Route::group(['middleware' => 'auth:partner'], function () {
-    Route::get('partners/{any?}', 'PartnerController@index')->where('any','.*');;
+    //Route::get('partners/{any?}', 'PartnerController@index')->where('any','.*');;
     //Route::get('/{any?}', 'HomeController@index')->name('home')->where('any','.*');;
 });
 Route::group(['middleware' => 'auth'], function () {

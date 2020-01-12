@@ -5,6 +5,8 @@ namespace App\Http\Middleware;
 use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\DB;
+
 class RequestLoggerMiddleware
 {
     /**
@@ -35,6 +37,15 @@ class RequestLoggerMiddleware
         $data.= 'Method: ' . $request->method() . "\n";
         $data.= 'Input: ' . $request->getContent() . "\n";
         $data.= 'Output: ' . $response->getContent() . "\n";
-        \File::prepend(storage_path('logs' . DIRECTORY_SEPARATOR . $filename), $data. "\n" . str_repeat("=", 80) . "\n\n");
+        //\File::prepend(storage_path('logs' . DIRECTORY_SEPARATOR . $filename), $data. "\n" . str_repeat("=", 80) .
+        // "\n\n");getOdd
+        if (strpos($request->fullUrl(),'insertRunner')==false and strpos($request->fullUrl(),'getOdd')==false){
+            DB::table('api_logs')->insert([
+                'ip'=>$request->ip(),'header'=>json_encode($request->headers->all()),'url'=>$request->fullUrl(),
+                'method'=>$request->method(),'input'=>$request->getContent(),'output'=>$response->getContent(),
+                'time'=>gmdate("F j, Y, g:i a"),'duration'=>number_format($end_time - LARAVEL_START, 3)
+            ]);
+        }
+
     }
 }
