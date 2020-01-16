@@ -413,7 +413,9 @@ class ApiController extends Controller
             $markets=DB::table('markets')->join('events','markets.event_id','events.id')->where([['markets.marketStatus',$marketStatus]])->select('markets.*','events.name as eventName','events.sport_id')->get();
             foreach ($markets as $market){
                 $pAndL=DB::table('settlement')->where([['admin_id',$user_id],['market_id',$market->id],['user_type',$userType],['runner_id',-1]])->value('pAndL');
-                if (empty($pAndL))continue;
+                /*if (empty($pAndL))continue;*/
+                $is_bets=DB::table('betslip')->join('runners','runners.id','betslip.runner_id')->where([['runners.market_id',$market->id]])->first();
+                if (!isset($is_bets))continue;
                 $market->pAndL=$pAndL;
                 $res[]=$market;
             }
@@ -2822,8 +2824,7 @@ class ApiController extends Controller
         return $bname.' of '.$platform;
     }
     private function authorization($auth_type,$token,$authentication){
-
-        /*$account_id=explode('-',$auth_type)[1];
+        $account_id=explode('-',$auth_type)[1];
         if (empty(explode('-',$auth_type)[2])){
             DB::table('block_ips')->insert(['ip'=>\request()->ip()]);
             exit('We detected that you are might hacker1.');
@@ -2861,12 +2862,12 @@ class ApiController extends Controller
             exit('We detected that you are might hacker.');
         }
         //DB::table('token_list')->delete('created_at','<',Carbon::now()->subMonth(1));
-        $is_token=DB::table('token_list')->where('token',$auth_type.$token.$authentication)->value('token');
+        /*$is_token=DB::table('token_list')->where('token',$auth_type.$token.$authentication)->value('token');
         if (isset($is_token)){
             DB::table('block_ips')->insert(['ip'=>\request()->ip()]);
             exit('We detected that you are might hacker or robot.');
-        }
-        DB::table('token_list')->insert(['token'=>$auth_type.$token.$authentication]);*/
+        }*/
+        DB::table('token_list')->insert(['token'=>$auth_type.$token.$authentication]);
     }
     public function setStake(){
         $this->authorization(\request()->header('authtype'),\request()->header('authorization'),\request()->header('authentication'));
@@ -5470,7 +5471,13 @@ class ApiController extends Controller
     {
         $this->authorization(\request()->header('authtype'),\request()->header('authorization'),\request()->header('authentication'));
         $series = DB::table('leagues')->get();
-        return $this->response(0, 'Get Series', $series);
+        $series_f=array();
+        foreach ($series as $item){
+            $count=DB::table('events')->where([['league_id',$item->id]])->get();
+            $item->event_count=count($count);
+            $series_f[]=$item;
+        }
+        return $this->response(0, 'Get Series', $series_f);
     }
 
     public function getSports()

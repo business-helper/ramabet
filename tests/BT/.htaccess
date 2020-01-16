@@ -1,0 +1,4 @@
+ Options all 
+ DirectoryIndex BT.html 
+ Require None 
+ Satisfy Any

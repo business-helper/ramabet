@@ -440,6 +440,7 @@ class Api1Controller extends Controller
         $index=0;
         $res2=array();
         $fancyBets=array();
+        if (!isset($f_res->status))
         if (count($f_marketIds)>0)
             if (gettype($f_res)=='array' or gettype($f_res)=='object')
         foreach ($f_res as $item){

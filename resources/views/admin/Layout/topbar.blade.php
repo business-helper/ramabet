@@ -81,9 +81,9 @@
                         <router-link class="dropdown-item" :to="'/management/series'">
                             Series
                         </router-link>
-                        <router-link class="dropdown-item" to="/management/events">
+                        {{--<router-link class="dropdown-item" to="/management/events">
                             Events
-                        </router-link>
+                        </router-link>--}}
                     @endif
 
                     <router-link class="dropdown-item" to="/client/user">

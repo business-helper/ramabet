@@ -643,6 +643,19 @@
                         let index = this.placedBetsOfUnMatched.findIndex(item => item.id === id);
                         this.placedBetsOfUnMatched.splice(index, 1);
                         Event.$emit('updateBalance', 1);
+
+                        Event.$emit('deletedBetSlip', data.data.data.note);
+                        var starCountRef = this.$firebase.database().ref('/');
+                        var delPlacedBet=data.data.data.delItem;
+                        starCountRef.update({
+                            delPlacedBet
+                        }).then((data)=>{
+                            //success callback
+                            console.log('data ' , data)
+                        }).catch((error)=>{
+                            //error callback
+                            console.log('error ' , error)
+                        })
                     } else {
                         showNotification('alert-success', data.data.message, 'top', 'right', 'animated fadeInRight', 'animated fadeOutRight');
                     }

@@ -43,7 +43,7 @@ Route::post('/updateBalance', 'ApiController@updateBalance');
 Route::post('testing','ApiController@testing');
 Route::post('getEventOfSports','ApiController@getEventOfSports');
 Route::post('updateOdd','ApiController@updateOdd');
-//Route::post('getEventOfLeague','ApiController@getEventOfLeague');
+Route::post('getEventOfLeague','ApiController@getEventOfLeague');
 Route::get('getRunnerOfMatch/{event_id}','ApiController@getRunnerOfMatch');
 //Route::get('getBetSlips/{user_id}','ApiController@getBetSlips');
 Route::get('getPlacedBetSlips/{user_id}/{market_id?}','ApiController@getPlacedBetSlips');

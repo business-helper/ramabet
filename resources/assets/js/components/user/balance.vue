@@ -168,13 +168,22 @@
     export default {
         data() {
             return {
-                wallet: 0, liability: 0, name: 'guest',getUserTimer:'',matched:0,user:[],countDeclare:0,getSettlement:0,stake:[0,0,0,0,0,0],readFlag:0,newPassword:'',oldPassword:'',confirmPassword:'',is_read:'true'
+                wallet: 0, liability: 0,
+                name: 'guest',getUserTimer:'',matched:0,user:[],countDeclare:0,getSettlement:0,stake:[0,0,0,0,0,0],readFlag:0,newPassword:'',oldPassword:'',confirmPassword:'',is_read:'true',delPlaceBetCount:0
             }
         },
         props: [
 
         ],
         mounted() {
+            Event.$on('getDelPlacedBet', (data) => {
+                if ( data==null)return;
+                if (data.bet_item.user_id==this.$userId && this.delPlaceBetCount>0){
+                    Event.$emit('delPlacedBets',data);
+                    showNotification('alert-success',data.msg+' by admin','bottom','right','animated fadeInRight','animated fadeOutRight');
+                }
+                this.delPlaceBetCount++;
+            });
             Event.$on('updateBalance', (data) => {
                 this.read();
             });
@@ -365,7 +374,14 @@
                 Event.$emit('updateBalance', snapshot.val());
             });
             console.log('Create Element');
+            var starCountRef = this.$firebase.database().ref('delPlacedBet/');
+            starCountRef.on('value', function (snapshot) {
 
+                let data=snapshot.val();
+                console.log(data);
+                Event.$emit('getDelPlacedBet', data);
+
+            });
             this.read();
 
         },
