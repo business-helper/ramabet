@@ -5,6 +5,7 @@
 /vendor
 /.idea
 /storage/logs
+/storage/logs/larabel.log
 /.vagrant
 /config/database.php
 #/resources/admin
