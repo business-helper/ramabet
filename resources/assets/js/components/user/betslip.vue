@@ -75,7 +75,6 @@
         // }else{
         //     this.delaySec = item.delaySec;
         // }
-
         this.marketType = item.marketType;
     }
     import BetSlipItem from './betslip_item.vue';
@@ -193,7 +192,7 @@
                 this.show_footer='hide';
                 this.is_show='show';
                 //let index = this.betslips.findIndex(item => item.id === id);
-                this.betslips=[]
+                this.betslips=[];
                 Event.$emit('deletedBetSlip','');
                /* window.axios.get(`/api/delBetSlip/${id}`).then((data) => {
                     if (data.data.state==0){
@@ -245,7 +244,7 @@
                         }).then((data)=>{
                             //success callback
                             console.log('data ' , data)
-                        })
+                        });
                         data.data.forEach(item=>{
                             Event.$emit('placedBets', item);
                         });

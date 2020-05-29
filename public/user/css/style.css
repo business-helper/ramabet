@@ -3128,9 +3128,7 @@
 }
 @media only screen and (max-device-width: 500px) {
     .odds_div{
-
         flex: 1;
-
     }
     .odd_div{
         justify-content: center;
@@ -3149,8 +3147,6 @@
     .sticky-tabs{
         padding:  0 0px!important;
     }
-
-
 }
 .match-tabs{
     width: fit-content;
